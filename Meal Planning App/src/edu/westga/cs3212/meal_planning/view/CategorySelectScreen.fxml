@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane minHeight="700.0" minWidth="525.0" prefHeight="600.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.meal_planning.view.CategorySelectScreen">
+   <children>
+      <Label layoutX="191.0" layoutY="24.0" text="Recipe Categories">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="categoryList" layoutX="14.0" layoutY="51.0" onMouseClicked="#selectCategory" prefHeight="644.0" prefWidth="496.0" />
+   </children>
+</AnchorPane>

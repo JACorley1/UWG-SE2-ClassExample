@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane minHeight="700.0" minWidth="525.0" prefHeight="700.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.meal_planning.view.RecipeViewScreen">
+   <children>
+      <Label fx:id="name" layoutX="231.0" layoutY="14.0" text="Name">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="52.0" text="Prep Time:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="308.0" layoutY="52.0" text="Cook Time:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="prepTime" layoutX="168.0" layoutY="54.0" text="Label" />
+      <Label fx:id="cookTime" layoutX="384.0" layoutY="54.0" text="Label" />
+      <Label layoutX="30.0" layoutY="83.0" text="Ingredients">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="287.0" text="Instructions">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="ingredientList" layoutX="29.0" layoutY="110.0" prefHeight="174.0" prefWidth="468.0" />
+      <ListView fx:id="instructions" layoutX="29.0" layoutY="314.0" prefHeight="367.0" prefWidth="468.0" />
+      <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToHome" text="Home" />
+   </children>
+</AnchorPane>
