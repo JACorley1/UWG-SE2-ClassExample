@@ -6,13 +6,21 @@ import java.util.List;
 import edu.westga.cs3212.meal_planning.model.Recipe;
 import edu.westga.cs3212.meal_planning.model.RecipeManager;
 
-/** Control access to the RecipeManager for the gui.
+/** Control access to the RecipeManager for the gui. Implements a version of the Singleton pattern 
+ * to ensure only one recipeManager exists, and all views reference the same recipeManage.
  * 
  * @author jcorley
  */
-public class RecipeStore {
+class RecipeStore {
 	private static RecipeManager recipeManager = null;
+	private static String currentCategory = null;
 
+	/** Loads the list of recipes for the application from the appropriate source.
+	 * NOTE: This method currently loads a hard-coded set of recipes for testing 
+	 * purposes, but should eventually load the recipes from the server.
+	 * 
+	 * @return list of recipes
+	 */
 	protected static List<Recipe> loadRecipes() {
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		
@@ -38,6 +46,24 @@ public class RecipeStore {
 			RecipeStore.recipeManager = new RecipeManager(RecipeStore.loadRecipes());
 		}
 		return RecipeStore.recipeManager;
+	}
+
+	   
+	/** Set the category for recipes to select.
+	 * 
+	 * @precondition category != null
+	 * @postcondition initializes the category of recipes available on the recipe select screen
+	 * 
+	 * @param category category of recipe available to select.
+	 */
+	public static void setCurrentCategory(String category) {
+		if (category == null) {
+			throw new IllegalArgumentException("Category must not be null.");
+		}
+		RecipeStore.currentCategory = category;
+	}
+	public static String getCurrentCategory() {
+		return RecipeStore.currentCategory;
 	}
 
 }

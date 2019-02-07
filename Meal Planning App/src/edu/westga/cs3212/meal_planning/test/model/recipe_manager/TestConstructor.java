@@ -13,7 +13,41 @@ import edu.westga.cs3212.meal_planning.model.RecipeManager;
 class TestConstructor {
 
 	@Test
-	void test() {
+	void testRecipesIsNull() {
+		assertThrows(
+						IllegalArgumentException.class, 
+						()->{
+								new RecipeManager(null);
+						}
+					);
+	}
+
+	@Test
+	void testCreateManagerWithNoRecipes() {
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		
+		RecipeManager result = new RecipeManager(recipes);
+		
+		List<Recipe> recipesList = result.getRecipes();
+		assertEquals(0, recipesList.size());
+	}
+
+	@Test
+	void testCreateManagerWithOneRecipe() {
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		
+		Recipe recipe1 = new Recipe("lasagna", List.of("pasta", "italian"), 1.0, 2.0, List.of("meat", "noodles", "sauce", "cheese"), List.of("Combine ingredients", "Cook ingredients"), 2);
+		recipes.add(recipe1);
+		
+		RecipeManager result = new RecipeManager(recipes);
+		
+		List<Recipe> recipesList = result.getRecipes();
+		assertEquals(1, recipesList.size());
+		assertSame(recipe1, recipesList.get(0));
+	}
+
+	@Test
+	void testCreateManagerWithSeveralRecipes() {
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		
 		Recipe recipe1 = new Recipe("lasagna", List.of("pasta", "italian"), 1.0, 2.0, List.of("meat", "noodles", "sauce", "cheese"), List.of("Combine ingredients", "Cook ingredients"), 2);

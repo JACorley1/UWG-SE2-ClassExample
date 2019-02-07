@@ -13,7 +13,7 @@ import edu.westga.cs3212.meal_planning.model.RecipeManager;
 class TestGetRecipesWithCategory {
 
 	@Test
-	void test1() {
+	void testMultipleRecipesWithCategory() {
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		
 		Recipe recipe1 = new Recipe("lasagna", List.of("pasta", "italian"), 1.0, 2.0, List.of("meat", "noodles", "sauce", "cheese"), List.of("Combine ingredients", "Cook ingredients"), 2);
@@ -32,7 +32,7 @@ class TestGetRecipesWithCategory {
 	}
 
 	@Test
-	void test2() {
+	void testMultipleRecipesNotAllHaveCategory() {
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		
 		Recipe recipe1 = new Recipe("lasagna", List.of("pasta", "italian"), 1.0, 2.0, List.of("meat", "noodles", "sauce", "cheese"), List.of("Combine ingredients", "Cook ingredients"), 2);
@@ -47,6 +47,34 @@ class TestGetRecipesWithCategory {
 		
 		assertEquals(1, result.size());
 		assertSame(recipe2, result.get(0));
+	}
+
+	@Test
+	void testMultipleRecipesNoneHaveCategory() {
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		
+		Recipe recipe1 = new Recipe("lasagna", List.of("pasta", "italian"), 1.0, 2.0, List.of("meat", "noodles", "sauce", "cheese"), List.of("Combine ingredients", "Cook ingredients"), 2);
+		recipes.add(recipe1);
+		
+		Recipe recipe2 = new Recipe("eggplant parmesan", List.of("pasta", "italian", "vegetarian"), 3.0, 4.0, List.of("eggplant", "noodles", "sauce", "cheese"), List.of("Combine ingredients", "Cook ingredients"), 4);
+		recipes.add(recipe2);
+		
+		RecipeManager manager = new RecipeManager(recipes);
+		
+		List<Recipe> result = manager.getRecipesWithCategory("vegan");
+		
+		assertEquals(0, result.size());
+	}
+
+	@Test
+	void testNoRecipes() {
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		
+		RecipeManager manager = new RecipeManager(recipes);
+		
+		List<Recipe> result = manager.getRecipesWithCategory("vegan");
+		
+		assertEquals(0, result.size());
 	}
 
 }

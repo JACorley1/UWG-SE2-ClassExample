@@ -46,17 +46,23 @@ public final class RecipeManager {
 		ArrayList<String> categories = new ArrayList<String>();
 		
 		for (Recipe recipe : this.recipes) {
-			for (String category : recipe.getCategories()) {
-				if (!categories.contains(category)) {
-					categories.add(category);
-				}
-			}
+			this.addCategoriesFromRecipe(categories, recipe);
 		}
 		
 		return categories;
 	}
+
+	private void addCategoriesFromRecipe(ArrayList<String> categories, Recipe recipe) {
+		for (String currentCategory : recipe.getCategories()) {
+			if (!categories.contains(currentCategory)) {
+				categories.add(currentCategory);
+			}
+		}
+	}
 	
 	/** Get a list of all recipes with the specified category.
+	 * Note: null is allowed for category, but no result will be 
+	 * returned as a Recipe may not have null as a category.
 	 * 
 	 * @precondition none
 	 * @postcondition none
@@ -66,15 +72,15 @@ public final class RecipeManager {
 	 * @return a list of all recipes with the specified category
 	 */
 	public List<Recipe> getRecipesWithCategory(String category) {
-		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		ArrayList<Recipe> recipesWithCategory = new ArrayList<Recipe>();
 		
-		for (Recipe recipe : this.recipes) {
-			if (recipe.getCategories().contains(category)) {
-				recipes.add(recipe);
+		for (Recipe currentRecipe : this.recipes) {
+			if (currentRecipe.getCategories().contains(category)) {
+				recipesWithCategory.add(currentRecipe);
 			}
 		}
 		
-		return recipes;
+		return recipesWithCategory;
 	}
 
 }
