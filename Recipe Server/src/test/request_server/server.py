@@ -1,7 +1,7 @@
 '''
 Created on Feb 14, 2019
 
-@author: Lanthorr
+@author: jcorley
 '''
 import unittest
 
