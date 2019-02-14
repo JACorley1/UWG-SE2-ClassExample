@@ -7,6 +7,7 @@ import sys
 import zmq
 import json
 from request_server.recipe_request_handler import RecipeRequestHandler
+from request_server import constants
 
 def log(message):
     print("SERVER::{0}".format(message))
@@ -24,10 +25,12 @@ def main(protocol, ipAddress, port):
         json_message = socket.recv_string()
         request = json.loads(json_message)
         log("Received request: {0}".format(request))
-        if("request_type" not in request):
-            socket.send_string({"success_code":-1, "failure_message":"no request type"})
-        elif(request['request_type'] == "exit"):
+        if(request == "exit"):
             return
+        elif(constants.KEY_REQUEST_TYPE not in request):
+            response = {constants.KEY_STATUS:constants.BAD_MESSAGE_STATUS, constants.KEY_FAILURE_MESSAGE:"no request type"}
+            json_response = json.dumps(response)
+            socket.send_string(json_response)
         else:
             response = recipeRequestHandler.handleRequest(request)
             json_response = json.dumps(response)
@@ -35,4 +38,4 @@ def main(protocol, ipAddress, port):
 
 if (__name__ == "__main__"):
     #main(sys.argv[1], sys.argv[2], sys.argv[3])
-    main("tcp", "127.0.0.1", "5555")
+    main(constants.PROTOCOL, constants.IP_ADDRESS, constants.PORT)

@@ -3,6 +3,7 @@ Created on Feb 14, 2019
 
 @author: jcorley
 '''
+from request_server import constants
 
 class RecipeRequestHandler:
     '''
@@ -40,9 +41,9 @@ class RecipeRequestHandler:
         '''
             Returns a response with a standard success code (1) and the collection of all recipes stored by the server.
         '''
-        response = {}
-        response["success_code"] = 1
-        response["recipes"] = self._recipes
+        response = {} 
+        response[constants.KEY_STATUS] = constants.SUCCESS_STATUS
+        response[constants.KEY_RECIPES] = self._recipes
         
         return response
     
@@ -54,9 +55,9 @@ class RecipeRequestHandler:
             Supported request types:
                 load_recipes
         '''
-        response = {"success_code":-2, "failure_message":"unsupported request type"}
+        response = {constants.KEY_STATUS:constants.UNSUPPORTED_OPERATION_STATUS, constants.KEY_FAILURE_MESSAGE:"unsupported request type"}
         
-        if(request["request_type"] == "load_recipes"):
+        if(request[constants.KEY_REQUEST_TYPE] == constants.LOAD_RECIPES_REQUEST_TYPE):
             response = self._loadRecipes()
         
         return response
